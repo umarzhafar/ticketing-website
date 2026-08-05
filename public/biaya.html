@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biaya - HELLPHORIA</title>
+    
+    <!-- Manggil file CSS yang sama -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- CSS tambahan khusus buat kotak harga di halaman ini -->
+    <style>
+        .content-section {
+            padding: 50px 40px;
+            max-width: 900px;
+            margin: 40px auto;
+            text-align: center; /* Teks di tengah */
+        }
+        .content-section h1 {
+            color: #4f0814; 
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+        .content-section > p {
+            color: #666;
+            margin-bottom: 40px;
+        }
+        
+        /* Desain Kotak Harga (Pricing Cards) */
+        .pricing-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .pricing-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            padding: 30px;
+            width: 300px;
+            border-top: 5px solid #e52020; /* Garis merah di atas kotak */
+            text-align: left;
+        }
+        .pricing-card h2 {
+            color: #3b0610;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        .pricing-card .price {
+            font-size: 36px;
+            font-weight: bold;
+            color: #e52020;
+            margin-bottom: 20px;
+        }
+        .pricing-card .price span {
+            font-size: 16px;
+            color: #888;
+            font-weight: normal;
+        }
+        .pricing-card ul {
+            list-style-type: none;
+            margin-bottom: 30px;
+        }
+        .pricing-card ul li {
+            margin-bottom: 10px;
+            color: #444;
+            font-size: 15px;
+        }
+        
+        /* Tombol beli di dalam kotak */
+        .btn-buy {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            text-align: center;
+            background-color: #e52020;
+            color: white;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        .btn-buy:hover {
+            background-color: #cc1b1b;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            color: #e52020;
+            font-weight: bold;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Top Bar -->
+    <div class="top-bar">
+        <a href="index.html">Beranda</a> <!-- Link balik ke halaman utama -->
+        <a href="tentang.html">Tentang HELLPHORIA</a> <!-- Link ke halaman tentang -->
+        <a href="https://wa.me/6281234567890" target="_blank">Hubungi Kami</a>
+    </div>
+
+    <!-- 2. Main Navbar -->
+    <nav class="navbar">
+        <div class="brand">HELLPHORIA</div>
+    </nav>
+
+    <!-- 3. Konten Utama Halaman Biaya -->
+    <section class="content-section">
+        <h1>Biaya Layanan & Tiket</h1>
+        <p>Pilih kategori tiket yang sesuai dengan kebutuhan pengalaman konser kamu.</p>
+        
+        <div class="pricing-container">
+            <!-- Kotak Harga Reguler -->
+            <div class="pricing-card">
+                <h2>Reguler</h2>
+                <div class="price">Rp 250k<span> / tiket</span></div>
+                <ul>
+                    <li>✓ Akses masuk ke area festival</li>
+                    <li>✓ Berdiri (Standing)</li>
+                    <li>✓ Akses ke area F&B umum</li>
+                </ul>
+                <a href="#" class="btn-buy">Pilih Reguler</a>
+            </div>
+
+            <!-- Kotak Harga VIP -->
+            <div class="pricing-card">
+                <h2>VIP</h2>
+                <div class="price">Rp 750k<span> / tiket</span></div>
+                <ul>
+                    <li>✓ Area menonton paling depan</li>
+                    <li>✓ Jalur masuk khusus (Fast Track)</li>
+                    <li>✓ Merchandise eksklusif</li>
+                    <li>✓ Akses lounge VIP</li>
+                </ul>
+                <a href="#" class="btn-buy">Pilih VIP</a>
+            </div>
+        </div>
+        
+        <!-- Tombol untuk balik ke index.html -->
+        <a href="index.html" class="back-link">&larr; Kembali ke Halaman Utama</a>
+    </section>
+
+</body>
+</html>

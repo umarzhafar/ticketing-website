@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tikeket.com</title>
+    
+    <!-- Manggil script Google -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    
+    <!-- Manggil file CSS buatan kita -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 1. Top Bar -->
+    <div class="top-bar">
+        <a href="tentang.html">Tentang tikeket</a>
+        <a href="biaya.html">Biaya</a>
+        <a href="https://wa.me/6285890001236" target="_blank">Hubungi Kami</a>
+    </div>
+
+    <!-- 2. Main Navbar -->
+    <nav class="navbar">
+        <div class="brand">tikeket</div>
+
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="kolomPencarian" placeholder="Cari event seru disini">
+                <button id="tombolCari">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- INI BAGIAN YANG DIUBAH (NAV ACTIONS) -->
+        <div class="nav-actions">
+            <!-- Menu Guest (Belum Login) -->
+            <div id="guestMenu">
+                <a href="register.html"><button class="btn btn-outline">Daftar</button></a>
+                <a href="login.html"><button class="btn btn-solid">Masuk</button></a>
+            </div>
+            
+            <!-- Menu User (Sudah Login) -->
+            <div id="userMenu" style="display: none;">
+                <span id="userEmailNav" style="margin-right: 15px; font-weight: bold; font-size: 14px;"></span>
+                <button id="logoutBtn" class="btn btn-outline">Keluar</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 3. Hero Section (Banner Slider) -->
+    <section class="hero-section">
+        <!-- Wrapper ini gua kasih batas maksimal 1100px biar rapi kayak desain awal lu -->
+        <div class="slider-wrapper" style="width: 100%; max-width: 1100px; position: relative; overflow: hidden; border-radius: 12px; box-shadow: 0 15px 30px rgba(0,0,0,0.1);">
+            
+            <div class="slider-container">
+                
+                <!-- SLIDE 1 (Acara Zodiac Universe) -->
+                <!-- Class-nya sekarang bener: banner-container slide -->
+                <div class="banner-container slide" style="background: linear-gradient(to right, #380108, #cc151e);">
+                    <div class="banner-subtitle">MENAMPILKAN</div>
+                    <div class="banner-title">ZODIAC<br>UNIVERSE</div>
+                    <div class="banner-desc">JAYAMKMR • KARTHAM • BARTMAN • MC SYAQIW</div>
+                    <div class="banner-date">1 AGUSTUS • Stalk JAKARTA</div>
+                    <a href="detailevent1.html">
+                        <button class="banner-btn">Beli tiket di Sini</button>
+                    </a>
+                </div>
+                
+                <!-- SLIDE 2 (Acara Contoh Buat Dites Geser) -->
+                <div class="banner-container slide" style="background: linear-gradient(to right, #2a0845, #6441A5);">
+                    <div class="banner-subtitle">SEGERA HADIR</div>
+                    <div class="banner-title">FESTIVAL<br>INDIE LOKAL</div>
+                    <div class="banner-desc">HINDIA • PAMUNGKAS • FOURTWNTY</div>
+                    <div class="banner-date">15 SEPTEMBER • GBK JAKARTA</div>
+                    <a href="detailevent2.html">
+                        <button class="banner-btn">Lihat detail</button>
+                    </a>
+                </div>
+
+            </div>
+            
+            <!-- Titik-titik di bawah banner -->
+            <div class="dots-container" style="position: absolute; bottom: 20px; width: 100%; display: flex; justify-content: center; gap: 8px;">
+                <div class="dot active"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Manggil file JavaScript buatan kita -->
+    <script src="script.js"></script>
+    <!-- INI PENTING: Manggil otak Firebase biar menu dinamisnya jalan -->
+    <script type="module" src="firebase-auth.js"></script>
+</body>
+</html>

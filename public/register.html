@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Akun - HELLPHORIA</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .auth-container { 
+            max-width: 400px; 
+            margin: 100px auto; 
+            padding: 30px; 
+            background: white; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+            text-align: center; 
+        }
+        .auth-container h2 { color: #4f0814; margin-bottom: 20px; }
+        .input-group { margin-bottom: 15px; text-align: left; }
+        .input-group input { 
+            width: 100%; 
+            padding: 12px; 
+            border: 1px solid #ccc; 
+            border-radius: 6px; 
+            outline: none; 
+            font-size: 14px;
+        }
+        .btn-auth { 
+            width: 100%; 
+            padding: 12px; 
+            background-color: #e52020; 
+            color: white; 
+            border: none; 
+            border-radius: 6px; 
+            font-weight: bold; 
+            font-size: 16px;
+            cursor: pointer; 
+        }
+        .btn-auth:hover { background-color: #cc1b1b; }
+        .back-link { display: inline-block; margin-top: 20px; color: #666; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <a href="index.html">Kembali ke Beranda</a>
+    </div>
+    
+    <div class="auth-container">
+        <h2>Buat Akun Baru</h2>
+        
+        <!-- Tambahan Input Biodata -->
+        <div class="input-group">
+            <input type="text" id="regNama" placeholder="Nama Lengkap" required>
+        </div>
+        <div class="input-group">
+            <input type="number" id="regHp" placeholder="Nomor HP (Contoh: 0812...)" required>
+        </div>
+
+        <!-- Input Kredensial (Yang sudah ada) -->
+        <div class="input-group">
+            <input type="email" id="regEmail" placeholder="Email lo" required>
+        </div>
+        <div class="input-group">
+            <input type="password" id="regPassword" placeholder="Password (min. 6 karakter)" required>
+        </div>
+        
+        <!-- Tombol untuk memicu pendaftaran -->
+        <button id="registerBtn" class="btn-auth">Daftar Sekarang</button>
+        
+        <a href="login.html" class="back-link">Sudah punya akun? Masuk di sini</a>
+    </div>
+    
+    <!-- Kita pakai file otak firebase yang sama -->
+    <script type="module" src="firebase-auth.js"></script>
+</body>
+</html>

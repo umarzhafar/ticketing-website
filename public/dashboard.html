@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Pribadi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">HELLPHORIA</div>
+        <div class="nav-actions">
+            <!-- Tombol Keluar (Logout) -->
+            <button id="logoutBtn" class="btn btn-outline">Keluar Akun</button>
+        </div>
+    </nav>
+
+    <div style="text-align: center; margin-top: 100px; color: #4f0814;">
+        <h1 id="userEmail">Memuat...</h1>
+        <p>Selamat datang di area khusus member!</p>
+    </div>
+
+    <!-- Panggil file Firebase Auth kita yang tadi -->
+    <script type="module" src="firebase-auth.js"></script>
+</body>
+</html>

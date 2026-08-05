@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festival Indie Lokal - tikeket.com</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .detail-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .detail-title { color: #2a0845; font-size: 32px; font-weight: bold; margin-bottom: 10px; }
+        .detail-info { color: #666; font-size: 16px; margin-bottom: 20px; }
+        .section-box { margin-top: 30px; }
+        .section-box h3 { color: #2a0845; margin-bottom: 10px; }
+        .section-box p { line-height: 1.6; color: #444; }
+        .btn-beli {
+            display: inline-block;
+            margin-top: 30px;
+            background-color: #6441A5;
+            color: white;
+            padding: 14px 30px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+        }
+        .btn-beli:hover { background-color: #52338c; }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar Sederhana / Kembali -->
+    <div class="top-bar" style="background-color: #2a0845;">
+        <a href="index.html">Kembali ke Beranda</a>
+    </div>
+
+    <!-- Konten Detail Event -->
+    <div class="detail-container">
+        <div class="detail-subtitle" style="color: #d4af37; font-weight: bold; letter-spacing: 1px;">SEGERA HADIR</div>
+        <h1 class="detail-title">FESTIVAL INDIE LOKAL</h1>
+        <p class="detail-info">📅 15 September &nbsp;|&nbsp; 📍 GBK JAKARTA &nbsp;|&nbsp; 🎤 HINDIA • PAMUNGKAS • FOURTWNTY</p>
+        
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
+        <div class="section-box">
+            <h3>Deskripsi Acara</h3>
+            <p>Festival Indie Lokal hadir untuk merayakan keindahan musik independen tanah air. Rasakan atmosfer magis bernyanyi bersama ribuan penonton di GBK Jakarta ditemani alunan syahdu dan enerjik dari Hindia, Pamungkas, dan Fourtwnty. Siapkan diri lu untuk malam yang penuh kenangan dan cerita.</p>
+        </div>
+
+        <div class="section-box">
+            <h3>Syarat & Ketentuan</h3>
+            <p>1. Tiket elektronik (e-ticket) wajib ditukarkan dengan gelang penonton sebelum memasuki area venue.<br>
+               2. Dilarang membawa makanan dan minuman dari luar.<br>
+               3. Patuhi aturan keamanan dan ketertiban selama acara berlangsung.</p>
+        </div>
+
+        <!-- Tombol Aksi Pembelian Tiket -->
+        <a href="#" class="btn-beli" onclick="alert('Fitur pembelian tiket Festival Indie Lokal segera dibuka!')">Pesan Tiket Sekarang (Rp 200.000)</a>
+    </div>
+
+    <script src="script.js"></script>
+    <script type="module" src="firebase-auth.js"></script>
+</body>
+</html>

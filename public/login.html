@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masuk - HELLPHORIA</title>
+    <!-- Tetep manggil CSS lu biar desainnya nyambung -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Sedikit CSS tambahan biar form loginnya ke tengah dan cakep -->
+    <style>
+        .auth-container { 
+            max-width: 400px; 
+            margin: 100px auto; 
+            padding: 30px; 
+            background: white; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+            text-align: center; 
+        }
+        .auth-container h2 { color: #4f0814; margin-bottom: 20px; }
+        .input-group { margin-bottom: 15px; text-align: left; }
+        .input-group input { 
+            width: 100%; 
+            padding: 12px; 
+            border: 1px solid #ccc; 
+            border-radius: 6px; 
+            outline: none; 
+            font-size: 14px;
+        }
+        .btn-auth { 
+            width: 100%; 
+            padding: 12px; 
+            background-color: #e52020; 
+            color: white; 
+            border: none; 
+            border-radius: 6px; 
+            font-weight: bold; 
+            font-size: 16px;
+            cursor: pointer; 
+        }
+        .btn-auth:hover { background-color: #cc1b1b; }
+        .back-link { display: inline-block; margin-top: 20px; color: #666; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <!-- Top bar simple buat tombol balik ke beranda -->
+    <div class="top-bar">
+        <a href="index.html">Kembali ke Beranda</a>
+    </div>
+    
+    <!-- Kotak Login -->
+    <div class="auth-container">
+        <h2>Masuk ke Akun</h2>
+        <div class="input-group">
+            <input type="email" id="email" placeholder="Email lo">
+        </div>
+        <div class="input-group">
+            <input type="password" id="password" placeholder="Password (min. 6 karakter)">
+        </div>
+        
+        <!-- Tombol ini id-nya 'loginBtn', bakal dibaca sama file JS kita -->
+        <button id="loginBtn" class="btn-auth">Masuk</button>
+        
+        <a href="index.html" class="back-link">&larr; Balik ke Halaman Utama</a>
+    </div>
+
+    <!-- Panggil file Firebase Auth (Otak Login) yang udah lu bikin tadi -->
+    <script type="module" src="firebase-auth.js"></script>
+</body>
+</html> 

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Event - tikeket.com</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .detail-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .detail-title { color: #4f0814; font-size: 32px; font-weight: bold; margin-bottom: 10px; }
+        .detail-info { color: #666; font-size: 16px; margin-bottom: 20px; }
+        .section-box { margin-top: 30px; }
+        .section-box h3 { color: #4f0814; margin-bottom: 10px; }
+        .section-box p { line-height: 1.6; color: #444; }
+        .btn-beli {
+            display: inline-block;
+            margin-top: 30px;
+            background-color: #e52020;
+            color: white;
+            padding: 14px 30px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+        }
+        .btn-beli:hover { background-color: #cc1b1b; }
+
+        .pilihan-tiket-container { margin-top: 30px; }
+        .ticket-option { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border: 2px solid #e0e0e0; border-radius: 10px; margin-bottom: 12px; cursor: pointer; transition: all 0.2s ease-in-out; }
+        .ticket-option:hover { border-color: #e52020; }
+        .ticket-option.active { border-color: #e52020; background-color: #fff5f5; }
+        .ticket-info strong { display: block; font-size: 16px; color: #4f0814; }
+        .ticket-info p { margin: 4px 0 0 0; font-size: 13px; color: #666; }
+        .ticket-price { font-weight: bold; color: #e52020; font-size: 16px; }
+        .btn-beli-utama { width: 100%; margin-top: 20px; background-color: #e52020; color: white; padding: 16px; border: none; border-radius: 8px; font-weight: bold; font-size: 16px; text-align: center; cursor: pointer; transition: background-color 0.2s; }
+        .btn-beli-utama:hover { background-color: #cc1b1b; }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar Sederhana / Kembali -->
+    <div class="top-bar">
+        <a href="index.html">Kembali ke Beranda</a>
+    </div>
+
+    <!-- Konten Detail Event -->
+    <div class="detail-container">
+        <div class="detail-subtitle" style="color: #e5b83b; font-weight: bold; letter-spacing: 1px;">MENAMPILKAN</div>
+        <h1 class="detail-title">ZODIAC UNIVERSE</h1>
+        <p class="detail-info">📅 1 Agustus &nbsp;|&nbsp; 📍 Stalk JAKARTA &nbsp;|&nbsp; 🎤 JAYAMKMR • KARTHAM • BARTMAN • MC SYAQIW</p>
+        
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
+        <div class="section-box">
+            <h3>Deskripsi Acara</h3>
+            <p>ZODIAC UNIVERSE adalah konser musik spektakuler yang mempertemukan musisi-musisi papan atas dalam satu panggung megah. Nikmati pengalaman malam penuh energi, tata cahaya panggung yang memukau, dan penampilan spesial dari JAYAMKMR, Kartham, Bartman, serta dipandu oleh MC Syaqiw.</p>
+        </div>
+
+        <div class="section-box">
+            <h3>Syarat & Ketentuan</h3>
+            <p>1. Tiket yang sudah dibeli tidak dapat dikembalikan.<br>
+               2. Wajib menunjukkan e-ticket dan identitas diri (KTP/SIM) saat penukaran tiket fisik.<br>
+               3. Patuhi protokol kesehatan yang berlaku di area venue.</p>
+        </div>
+
+        <!-- Pilihan Paket Tiket / Meja -->
+        <div class="section-box pilihan-tiket-container">
+            <h3>Pilih Kategori Tiket / Meja</h3>
+            
+            <div class="ticket-option active" data-harga="150000">
+                <div class="ticket-info">
+                    <strong>Single Pass (1 Pax)</strong>
+                    <p>Akses masuk untuk 1 orang (Standing Area)</p>
+                </div>
+                <div class="ticket-price">Rp 150.000</div>
+            </div>
+
+            <div class="ticket-option" data-harga="1200000">
+                <div class="ticket-info">
+                    <strong>Table Package (4 Pax)</strong>
+                    <p>1 Meja VIP + Akses masuk 4 orang</p>
+                </div>
+                <div class="ticket-price">Rp 1.200.000</div>
+            </div>
+
+            <div class="ticket-option" data-harga="1800000">
+                <div class="ticket-info">
+                    <strong>Sofa VIP Package (6 Pax)</strong>
+                    <p>1 Meja Sofa + Akses masuk 6 orang + Free Drinks</p>
+                </div>
+                <div class="ticket-price">Rp 1.800.000</div>
+            </div>
+        </div>
+
+        <!-- Tombol Aksi Pembelian Tiket Dinamis -->
+        <button id="btnBeliTiket" class="btn-beli-utama" onclick="alert('Fitur pembayaran segera hadir!')">
+            Pesan Tiket Sekarang (Rp 150.000)
+        </button>   
+    </div>
+
+    <script>
+        const opsiTiket = document.querySelectorAll('.ticket-option');
+        const btnBeli = document.getElementById('btnBeliTiket');
+
+        opsiTiket.forEach(option => {
+            option.addEventListener('click', function() {
+                // 1. Lepas warna merah dari semua opsi
+                opsiTiket.forEach(opt => opt.classList.remove('active'));
+                
+                // 2. Tambahkan warna merah ke opsi yang diklik
+                this.classList.add('active');
+                
+                // 3. Ambil nilai harga dari data-harga
+                const harga = parseInt(this.getAttribute('data-harga'));
+                const hargaFormat = harga.toLocaleString('id-ID');
+                
+                // 4. Update teks di tombol
+                if (btnBeli) {
+                    btnBeli.innerText = `Pesan Tiket Sekarang (Rp ${hargaFormat})`;
+                }
+            });
+        });
+    </script>
+    <script type="module" src="firebase-auth.js"></script>
+</body>
+</html>

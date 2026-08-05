@@ -1,0 +1,192 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+body { background-color: #f8f9fa; }
+a { text-decoration: none; color: inherit; }
+
+.top-bar {
+    background-color: #3b0610;
+    color: #ffffff;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 40px;
+    font-size: 12px;
+    font-weight: 500;
+    gap: 24px;
+}
+.top-bar a:hover { color: #ffcccc; }
+
+.navbar {
+    background-color: #4f0814;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 40px;
+    color: white;
+}
+.brand { font-size: 18px; font-weight: 600; letter-spacing: 1px; width: 20%; }
+
+.search-container { flex: 1; max-width: 600px; display: flex; justify-content: center; }
+.search-box { display: flex; width: 100%; }
+.search-box input {
+    width: 100%; padding: 10px 16px; border: none;
+    background-color: #6d111d; color: white; border-radius: 4px 0 0 4px; outline: none; font-size: 14px;
+}
+.search-box input::placeholder { color: #b57a82; }
+.search-box button {
+    padding: 10px 20px; border: none; background-color: #e52020;
+    color: white; border-radius: 0 4px 4px 0; cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
+.search-box button:hover { background-color: #cc1b1b; }
+
+.nav-actions { display: flex; align-items: center; gap: 15px; width: 20%; justify-content: flex-end; }
+.btn {
+    padding: 8px 24px; border-radius: 6px; font-size: 15px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.btn-outline { border: 1px solid white; color: white; background: transparent; }
+.btn-outline:hover { background: rgba(255, 255, 255, 0.1); }
+.btn-solid { background-color: #e52020; color: white; border: none; }
+.btn-solid:hover { background-color: #cc1b1b; }
+
+.hero-section { padding: 40px 40px; display: flex; justify-content: center; }
+.banner-container {
+    width: 100%; max-width: 1100px; background: linear-gradient(to right, #380108, #cc151e);
+    border-radius: 12px; height: 380px; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; color: white; text-align: center;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1); position: relative;
+}
+.banner-subtitle { color: #e5b83b; font-size: 14px; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; }
+.banner-title { font-size: 52px; font-weight: 900; line-height: 1.1; margin-bottom: 20px; letter-spacing: 1px; }
+.banner-desc { font-size: 14px; margin-bottom: 5px; word-spacing: 2px; }
+.banner-date { font-size: 14px; font-weight: 700; margin-bottom: 30px; }
+.banner-btn {
+    background-color: white; color: #380108; padding: 12px 30px;
+    border-radius: 30px; font-size: 16px; font-weight: 700; border: none; cursor: pointer; transition: background-color 0.2s;
+}
+.banner-btn:hover { background-color: #f0f0f0; }
+
+.dots-container { position: absolute; bottom: 20px; display: flex; gap: 8px; }
+.dot { width: 6px; height: 6px; background-color: rgba(255,255,255,0.4); border-radius: 50%; cursor: pointer; }
+.dot.active { background-color: white; width: 20px; border-radius: 4px; }
+
+/* Bikin menu Daftar dan Masuk jadi bersebelahan */
+#guestMenu {
+    display: flex;
+    gap: 10px; /* Jarak antara tombol */
+    align-items: center;
+}
+
+/* Bikin email dan tombol Keluar jadi bersebelahan pas udah login */
+#userMenu {
+    display: flex;
+    gap: 15px; /* Jarak antara teks email dan tombol */
+    align-items: center;
+}
+
+/* Memastikan link tidak merusak bentuk tombol */
+#guestMenu a {
+    text-decoration: none;
+}
+
+/* --- PENGATURAN SLIDER GESER --- */
+
+/* Bikin kontainer utama menjejerkan slide ke samping */
+.slider-container {
+    display: flex;
+    width: 100%;
+    overflow-x: auto; /* Nyalain fitur scroll ke samping */
+    scroll-snap-type: x mandatory; /* Bikin efek magnet pas digeser */
+    scroll-behavior: smooth;
+    
+    /* Sembunyiin scrollbar jelek di bawah */
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
+}
+
+.slider-container::-webkit-scrollbar {
+    display: none; 
+}
+
+/* Pengaturan masing-masing slide */
+.banner-container.slide {
+    flex: 0 0 100%; /* Lebar slide 100% mengikuti parent (wrapper) */
+    width: 100%;
+    max-width: none; /* Matiin max-width bawaan biar ga error pas di-flex */
+    scroll-snap-align: start;
+    box-sizing: border-box;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN (KHUSUS TAMPILAN HP)
+   ========================================== */
+@media screen and (max-width: 768px) {
+    /* 1. Perbaiki Top Bar biar rapi */
+    .top-bar {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+        padding: 10px;
+    }
+
+    /* 2. Perbaiki Navbar yang tabrakan */
+    .navbar {
+        flex-direction: column; /* Ubah susunan jadi atas-bawah */
+        padding: 15px;
+        gap: 15px;
+    }
+    
+    .brand {
+        text-align: center;
+        width: 100%;
+    }
+
+    .search-container {
+        width: 100%;
+    }
+
+    .search-box {
+        width: 100%; /* Kotak pencarian jadi memanjang penuh */
+        max-width: none;
+    }
+
+    .nav-actions {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    /* 3. Sesuaikan ukuran Font Banner biar gak kebesaran di HP */
+    .banner-title {
+        font-size: 32px;
+    }
+    
+    .banner-desc, .banner-date {
+        font-size: 12px;
+    }
+
+    /* 4. Sesuaikan Halaman Detail Event (Biar ga kepotong) */
+    .detail-container {
+        margin: 15px;
+        padding: 20px;
+    }
+
+    .ticket-option {
+        flex-direction: column; /* Info tiket & harga disusun atas-bawah */
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .ticket-price {
+        align-self: flex-start;
+    }
+}

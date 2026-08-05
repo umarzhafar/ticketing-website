@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang titiket</title>
+    
+    <!-- Manggil file CSS lu yang udah ada biar desainnya nyambung -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Tambahan CSS sedikit khusus buat rapihin teks di halaman ini -->
+    <style>
+        .content-section {
+            padding: 50px 40px;
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .content-section h1 {
+            color: #4f0814; /* Warna merah gelap sesuai tema */
+            margin-bottom: 20px;
+            font-size: 32px;
+        }
+        .content-section p {
+            color: #444;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #e52020;
+            font-weight: bold;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Top Bar (Hampir sama, tapi link-nya gua sesuaikan) -->
+    <div class="top-bar">
+        <a href="index.html">Beranda</a> <!-- Biar bisa balik ke halaman utama -->
+        <a href="biaya.html">Biaya</a>
+        <a href="https://wa.me/6281234567890" target="_blank">Hubungi Kami</a>
+    </div>
+
+    <!-- 2. Main Navbar (Gua bikin simpel tanpa kotak search biar rapi) -->
+    <nav class="navbar">
+        <div class="brand">HELLPHORIA</div>
+    </nav>
+
+    <!-- 3. Konten Utama Halaman Tentang -->
+    <section class="content-section">
+        <h1>Tentang HELLPHORIA</h1>
+        <p>HELLPHORIA adalah platform penjualan tiket konser dan event paling seru di Indonesia. Kami berkomitmen untuk memberikan pengalaman beli tiket yang cepat, aman, dan tanpa ribet.</p>
+        <p>Berdiri sejak tahun 2024, visi kami adalah menghubungkan penikmat musik dan acara hiburan dengan kreator event terbaik di seluruh negeri. Melalui sistem teknologi yang canggih, kami memastikan setiap transaksi berjalan mulus.</p>
+        
+        <!-- Tombol untuk balik ke index.html -->
+        <a href="index.html" class="back-link">&larr; Kembali ke Halaman Utama</a>
+    </section>
+
+</body>
+</html>
