@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profil - tikeket.com</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="background-color: #f9f9f9;">
+
+    <div class="profile-container" style="max-width: 450px; margin: 40px auto; padding: 25px; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+        <h2 style="text-align: center; color: #380108; margin-bottom: 25px; font-family: sans-serif;">Edit Profil Saya</h2>
+
+        <div style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 6px; font-size: 14px; font-weight: bold; color: #333;">Nama Lengkap</label>
+            <input type="text" id="profileNama" placeholder="Memuat nama..." style="width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #ccc; box-sizing: border-box; font-size: 14px;">
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 6px; font-size: 14px; font-weight: bold; color: #333;">Nomor HP</label>
+            <input type="text" id="profileHp" placeholder="Memuat nomor HP..." style="width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #ccc; box-sizing: border-box; font-size: 14px;">
+        </div>
+
+        <div style="margin-bottom: 25px;">
+            <label style="display: block; margin-bottom: 6px; font-size: 14px; font-weight: bold; color: #333;">Email (Tidak dapat diubah)</label>
+            <input type="email" id="profileEmail" disabled style="width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #ddd; background-color: #f0f0f0; color: #666; box-sizing: border-box; font-size: 14px;">
+        </div>
+
+        <button id="btnSimpanProfile" style="width: 100%; padding: 12px; background-color: #cc151e; color: white; border: none; border-radius: 6px; font-weight: bold; font-size: 15px; cursor: pointer;">Simpan Perubahan</button>
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <svg width="24" height="24" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            <span>Home</span>
+        </a>
+
+        <a href="bookings.html" class="nav-item">
+            <svg width="24" height="24" viewBox="0 0 24 24"><path d="M22 10V6c0-1.1-.9-2-2-2H4c-1.1 0-1.99.9-1.99 2v4c1.1 0 1.99.9 1.99 2s-.89 2-1.99 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c-1.1 0-2-.9-2-2s.9-2 2-2zm-2-1.46c-1.19.69-2 1.99-2 3.46s.81 2.77 2 3.46V18H4v-2.54c1.19-.69 2-1.99 2-3.46s-.81-2.77-2-3.46V6h16v2.54zM9 9h6v2H9zm0 4h6v2H9z"/></svg>
+            <span>Bookings</span>
+        </a>
+
+        <a href="profile.html" class="nav-item active">
+            <svg width="24" height="24" viewBox="0 0 24 24">
+                <circle cx="12" cy="7" r="4.5"/>
+                <path d="M12 13.5c-4.42 0-8 2.24-8 5 0 .55.45 1 1 1h14c.55 0 1-.45 1-1 0-2.76-3.58-5-8-5z"/>
+            </svg>
+            <span>Profile</span>
+        </a>
+    </div>
+
+    <script type="module" src="profile.js"></script>
+</body>
+</html>
