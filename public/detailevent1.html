@@ -99,35 +99,155 @@
             </div>
         </div>
 
-        <!-- Tombol Aksi Pembelian Tiket Dinamis -->
-        <button id="btnBeliTiket" class="btn-beli-utama" onclick="alert('Fitur pembayaran segera hadir!')">
-            Pesan Tiket Sekarang (Rp 150.000)
-        </button>   
-    </div>
+    <!-- Tombol Aksi Pembelian Tiket Dinamis -->
+
+    <button id="btnBeliTiket" class="btn-beli-utama">
+        Pesan Tiket Sekarang (Rp 150.000)
+    </button>
+
 
     <script>
-        const opsiTiket = document.querySelectorAll('.ticket-option');
-        const btnBeli = document.getElementById('btnBeliTiket');
+
+        const opsiTiket =
+            document.querySelectorAll('.ticket-option');
+
+        const btnBeli =
+            document.getElementById('btnBeliTiket');
+
+
+        // ==========================================
+        // PAKET DEFAULT
+        // ==========================================
+
+        let paketTerpilih = {
+
+            nama: "Single Pass (1 Pax)",
+
+            harga: 150000
+
+        };
+
+
+        // ==========================================
+        // MEMILIH PAKET
+        // ==========================================
 
         opsiTiket.forEach(option => {
-            option.addEventListener('click', function() {
-                // 1. Lepas warna merah dari semua opsi
-                opsiTiket.forEach(opt => opt.classList.remove('active'));
-                
-                // 2. Tambahkan warna merah ke opsi yang diklik
-                this.classList.add('active');
-                
-                // 3. Ambil nilai harga dari data-harga
-                const harga = parseInt(this.getAttribute('data-harga'));
-                const hargaFormat = harga.toLocaleString('id-ID');
-                
-                // 4. Update teks di tombol
-                if (btnBeli) {
-                    btnBeli.innerText = `Pesan Tiket Sekarang (Rp ${hargaFormat})`;
+
+            option.addEventListener(
+                'click',
+                function() {
+
+                    // Hilangkan active
+                    opsiTiket.forEach(opt => {
+
+                        opt.classList.remove(
+                            'active'
+                        );
+
+                    });
+
+
+                    // Aktifkan pilihan
+                    this.classList.add(
+                        'active'
+                    );
+
+
+                    // Ambil data
+                    const nama =
+                        this.getAttribute(
+                            'data-nama'
+                        );
+
+                    const harga =
+                        parseInt(
+                            this.getAttribute(
+                                'data-harga'
+                            )
+                        );
+
+
+                    // Simpan pilihan
+                    paketTerpilih = {
+
+                        nama: nama,
+
+                        harga: harga
+
+                    };
+
+
+                    // Format harga
+                    const hargaFormat =
+                        harga.toLocaleString(
+                            'id-ID'
+                        );
+
+
+                    // Update tombol
+                    btnBeli.innerText =
+                        `Pesan Tiket Sekarang (Rp ${hargaFormat})`;
+
                 }
-            });
+            );
+
         });
+
+
+        // ==========================================
+        // KLIK PESAN TIKET
+        // ==========================================
+
+        btnBeli.addEventListener(
+            'click',
+            function() {
+
+                const dataCheckout = {
+
+                    eventName:
+                        "ZODIAC UNIVERSE",
+
+                    eventDate:
+                        "1 Agustus",
+
+                    eventLocation:
+                        "Stalk JAKARTA",
+
+                    packageName:
+                        paketTerpilih.nama,
+
+                    packagePrice:
+                        paketTerpilih.harga
+
+                };
+
+
+                // Simpan data paket
+                localStorage.setItem(
+                    'selectedPackage',
+                    JSON.stringify(
+                        dataCheckout
+                    )
+                );
+
+
+                // Pergi ke checkout
+                window.location.href =
+                    'checkout.html';
+
+            }
+        );
+
     </script>
-    <script type="module" src="firebase-auth.js"></script>
+
+
+    <!-- Firebase Authentication -->
+
+    <script
+        type="module"
+        src="firebase-auth.js">
+    </script>
+
 </body>
 </html>

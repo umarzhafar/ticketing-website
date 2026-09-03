@@ -1,0 +1,317 @@
+/* =========================
+   CHECKOUT CONTAINER
+========================= */
+
+.checkout-container {
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.checkout-container > h1 {
+    text-align: center;
+    color: #4f0814;
+    margin-bottom: 30px;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.checkout-card {
+    background: white;
+    padding: 30px;
+    margin-bottom: 20px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.checkout-card h2 {
+    margin-top: 0;
+    color: #4f0814;
+}
+
+
+/* =========================
+   ORDER INFO
+========================= */
+
+.order-info {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+
+    padding-top: 15px;
+}
+
+.order-info div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.order-info span {
+    color: #777;
+    font-size: 14px;
+}
+
+.order-info strong {
+    font-size: 18px;
+    color: #222;
+}
+
+
+/* =========================
+   DESCRIPTION
+========================= */
+
+.description {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   PAYMENT METHODS
+========================= */
+
+.payment-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    margin-top: 20px;
+}
+
+.payment-option {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 16px;
+
+    background: white;
+
+    border: 2px solid #ddd;
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    transition: 0.2s;
+}
+
+.payment-option:hover {
+    border-color: #e52020;
+    background: #fff7f7;
+}
+
+.payment-option.active {
+    border-color: #e52020;
+    background: #fff1f1;
+}
+
+.payment-icon {
+    font-size: 25px;
+}
+
+.payment-option div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.payment-option small {
+    color: #777;
+}
+
+
+/* =========================
+   SELECTED PAYMENT
+========================= */
+
+.selected-payment {
+    margin-top: 20px;
+
+    padding: 12px;
+
+    background: #f5f5f5;
+
+    border-radius: 8px;
+
+    text-align: center;
+
+    color: #555;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.btn-primary {
+    width: 100%;
+
+    margin-top: 20px;
+
+    padding: 14px;
+
+    border: none;
+    border-radius: 7px;
+
+    background-color: #e52020;
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #cc1b1b;
+}
+
+.btn-primary:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+
+/* =========================
+   RESERVATION
+========================= */
+
+.reservation-card {
+    text-align: center;
+}
+
+.success-icon {
+    width: 60px;
+    height: 60px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #28a745;
+    color: white;
+
+    font-size: 32px;
+    font-weight: bold;
+}
+
+
+/* =========================
+   QR CODE
+========================= */
+
+.qr-container {
+    display: flex;
+    justify-content: center;
+
+    margin: 25px 0;
+}
+
+#qrcode {
+    padding: 15px;
+
+    background: white;
+
+    border: 1px solid #ddd;
+
+    border-radius: 10px;
+}
+
+
+/* =========================
+   RESERVATION CODE
+========================= */
+
+.reservation-label {
+    margin-bottom: 8px;
+
+    color: #777;
+
+    font-size: 14px;
+}
+
+.reservation-code {
+    display: inline-block;
+
+    padding: 12px 25px;
+
+    background: #f5f5f5;
+
+    border-radius: 8px;
+
+    color: #4f0814;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+}
+
+
+/* =========================
+   RESERVATION NAME
+========================= */
+
+.reservation-name {
+    margin-top: 25px;
+
+    font-size: 17px;
+
+    color: #333;
+}
+
+.reservation-name strong {
+    color: #4f0814;
+}
+
+
+/* =========================
+   RESERVATION DETAILS
+========================= */
+
+.reservation-details {
+    margin-top: 25px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+
+    text-align: left;
+}
+
+.reservation-details div {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 12px;
+
+    background: #f7f7f7;
+
+    border-radius: 7px;
+}
+
+.reservation-details span {
+    color: #777;
+}
