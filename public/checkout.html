@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Checkout - HELLPHORIA</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="checkout.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         TOP BAR
+    ========================== -->
+
+    <div class="top-bar">
+        <a href="index.html">Kembali ke Beranda</a>
+    </div>
+
+
+    <!-- =========================
+         CONTAINER
+    ========================== -->
+
+    <main class="checkout-container">
+
+        <h1>Checkout</h1>
+
+
+        <!-- =========================
+             STEP 1 : RINGKASAN PESANAN
+        ========================== -->
+
+        <section id="orderSection" class="checkout-card">
+
+            <h2>Ringkasan Pesanan</h2>
+
+            <div class="order-info">
+
+                <div>
+                    <span>Paket</span>
+                    <strong id="packageName">-</strong>
+                </div>
+
+                <div>
+                    <span>Harga</span>
+                    <strong id="packagePrice">Rp 0</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             STEP 2 : PEMBAYARAN
+        ========================== -->
+
+        <section id="paymentSection" class="checkout-card">
+
+            <h2>Metode Pembayaran</h2>
+
+            <p class="description">
+                Pilih salah satu metode pembayaran di bawah ini.
+            </p>
+
+
+            <div class="payment-methods">
+
+                <button
+                    class="payment-option"
+                    data-method="QRIS">
+
+                    <span class="payment-icon">▣</span>
+
+                    <div>
+                        <strong>QRIS</strong>
+                        <small>Scan menggunakan aplikasi pembayaran</small>
+                    </div>
+
+                </button>
+
+
+                <button
+                    class="payment-option"
+                    data-method="Transfer Bank">
+
+                    <span class="payment-icon">▤</span>
+
+                    <div>
+                        <strong>Transfer Bank</strong>
+                        <small>Transfer melalui rekening bank</small>
+                    </div>
+
+                </button>
+
+
+                <button
+                    class="payment-option"
+                    data-method="E-Wallet">
+
+                    <span class="payment-icon">▰</span>
+
+                    <div>
+                        <strong>E-Wallet</strong>
+                        <small>GoPay, OVO, DANA, dan lainnya</small>
+                    </div>
+
+                </button>
+
+            </div>
+
+
+            <p id="selectedPayment" class="selected-payment">
+                Belum memilih metode pembayaran
+            </p>
+
+
+            <!--
+                Untuk sementara tombol ini hanya simulasi.
+                Belum terhubung payment gateway.
+            -->
+
+            <button
+                id="payButton"
+                class="btn-primary">
+
+                Simulasikan Pembayaran Berhasil
+
+            </button>
+
+        </section>
+
+
+        <!-- =========================
+             STEP 3 : RESERVASI
+        ========================== -->
+
+        <section
+            id="reservationSection"
+            class="checkout-card reservation-card"
+            style="display: none;">
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <h2>Pembayaran Berhasil!</h2>
+
+            <p class="description">
+                Berikut adalah tanda reservasi kamu.
+                Simpan kode dan QR Code ini.
+            </p>
+
+
+            <!-- QR CODE -->
+
+            <div class="qr-container">
+
+                <div id="qrcode"></div>
+
+            </div>
+
+
+            <!-- KODE RESERVASI -->
+
+            <p class="reservation-label">
+                Kode Reservasi
+            </p>
+
+            <div
+                id="reservationCode"
+                class="reservation-code">
+
+                --------
+
+            </div>
+
+
+            <!-- NAMA USER -->
+
+            <p
+                id="reservationName"
+                class="reservation-name">
+
+                Reservasi atas nama -
+                
+            </p>
+
+
+            <!-- DETAIL RESERVASI -->
+
+            <div class="reservation-details">
+
+                <div>
+                    <span>Paket</span>
+                    <strong id="reservationPackage">-</strong>
+                </div>
+
+                <div>
+                    <span>Metode Pembayaran</span>
+                    <strong id="reservationPayment">-</strong>
+                </div>
+
+            </div>
+
+
+            <button
+                id="homeButton"
+                class="btn-primary">
+
+                Kembali ke Beranda
+
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <!--
+        Library QR Code
+        Kita gunakan QRCode.js dari CDN.
+    -->
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js">
+    </script>
+
+
+    <!-- Logic Checkout -->
+
+    <script
+        type="module"
+        src="checkout.js">
+    </script>
+
+</body>
+</html>
