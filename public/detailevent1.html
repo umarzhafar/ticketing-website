@@ -3,250 +3,241 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Event - tikeket.com</title>
+    <title>Detail Event - Tiketing</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .detail-container {
-            max-width: 900px;
-            margin: 40px auto;
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        .container { max-width: 800px; margin: 40px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        .banner-subtitle { color: #b22222; font-size: 13px; font-weight: bold; letter-spacing: 1px; margin-bottom: 5px; }
+        h1 { color: #4f0814; font-size: 28px; margin-bottom: 10px; }
+        .event-meta { color: #555; font-size: 14px; margin-bottom: 25px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+        h3 { color: #4f0814; margin-top: 25px; margin-bottom: 10px; font-size: 18px; }
+        p, li { color: #444; font-size: 14px; line-height: 1.6; }
+        ol { padding-left: 20px; }
+        
+        /* Styling Kartu Pilihan Tiket Interaktif */
+        .ticket-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 2px solid #e0e0e0;
+            padding: 18px 20px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            background: #fafafa;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
-        .detail-title { color: #4f0814; font-size: 32px; font-weight: bold; margin-bottom: 10px; }
-        .detail-info { color: #666; font-size: 16px; margin-bottom: 20px; }
-        .section-box { margin-top: 30px; }
-        .section-box h3 { color: #4f0814; margin-bottom: 10px; }
-        .section-box p { line-height: 1.6; color: #444; }
-        .btn-beli {
-            display: inline-block;
-            margin-top: 30px;
-            background-color: #e52020;
-            color: white;
-            padding: 14px 30px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 16px;
-            text-align: center;
+        .ticket-card:hover {
+            border-color: #b22222;
+            background: #fff;
         }
-        .btn-beli:hover { background-color: #cc1b1b; }
+        /* State saat kartu dipilih */
+        .ticket-card.selected {
+            border-color: #b22222;
+            background: #fff5f5;
+            box-shadow: 0 2px 8px rgba(178, 34, 34, 0.15);
+        }
+        .ticket-info b { display: block; font-size: 16px; color: #333; margin-bottom: 3px; }
+        .ticket-info p { margin: 0; font-size: 13px; color: #666; }
+        .ticket-price { font-size: 18px; font-weight: bold; color: #b22222; }
 
-        .pilihan-tiket-container { margin-top: 30px; }
-        .ticket-option { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border: 2px solid #e0e0e0; border-radius: 10px; margin-bottom: 12px; cursor: pointer; transition: all 0.2s ease-in-out; }
-        .ticket-option:hover { border-color: #e52020; }
-        .ticket-option.active { border-color: #e52020; background-color: #fff5f5; }
-        .ticket-info strong { display: block; font-size: 16px; color: #4f0814; }
-        .ticket-info p { margin: 4px 0 0 0; font-size: 13px; color: #666; }
-        .ticket-price { font-weight: bold; color: #e52020; font-size: 16px; }
-        .btn-beli-utama { width: 100%; margin-top: 20px; background-color: #e52020; color: white; padding: 16px; border: none; border-radius: 8px; font-weight: bold; font-size: 16px; text-align: center; cursor: pointer; transition: background-color 0.2s; }
-        .btn-beli-utama:hover { background-color: #cc1b1b; }
+        /* Tombol Pesan Utama */
+        .btn-checkout {
+            display: block;
+            width: 100%;
+            background-color: #e53935;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: background 0.2s;
+            text-decoration: none;
+        }
+        .btn-checkout:hover {
+            background-color: #c62828;
+        }
     </style>
 </head>
-<body>
+<body style="background-color: #f4f6f8;">
 
-    <!-- Navbar Sederhana / Kembali -->
-    <div class="top-bar">
-        <a href="index.html">Kembali ke Beranda</a>
+    <div class="top-bar" style="padding: 20px; max-width: 800px; margin: 0 auto;">
+        <a href="index.html" style="color: #4f0814; text-decoration: none; font-weight: bold;">&larr; Kembali ke Beranda</a>
     </div>
 
-    <!-- Konten Detail Event -->
-    <div class="detail-container">
-        <div class="detail-subtitle" style="color: #e5b83b; font-weight: bold; letter-spacing: 1px;">MENAMPILKAN</div>
-        <h1 class="detail-title">ZODIAC UNIVERSE</h1>
-        <p class="detail-info">📅 1 Agustus &nbsp;|&nbsp; 📍 Stalk JAKARTA &nbsp;|&nbsp; 🎤 JAYAMKMR • KARTHAM • BARTMAN • MC SYAQIW</p>
-        
-        <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
-
-        <div class="section-box">
-            <h3>Deskripsi Acara</h3>
-            <p>ZODIAC UNIVERSE adalah konser musik spektakuler yang mempertemukan musisi-musisi papan atas dalam satu panggung megah. Nikmati pengalaman malam penuh energi, tata cahaya panggung yang memukau, dan penampilan spesial dari JAYAMKMR, Kartham, Bartman, serta dipandu oleh MC Syaqiw.</p>
+    <div class="container">
+        <div class="banner-subtitle">MENAMPILKAN</div>
+        <h1 id="titleEvent">Memuat Event...</h1>
+        <div class="event-meta">
+            📅 <span id="dateEvent">-</span> | 📍 <span id="locationEvent">-</span>
         </div>
 
-        <div class="section-box">
-            <h3>Syarat & Ketentuan</h3>
-            <p>1. Tiket yang sudah dibeli tidak dapat dikembalikan.<br>
-               2. Wajib menunjukkan e-ticket dan identitas diri (KTP/SIM) saat penukaran tiket fisik.<br>
-               3. Patuhi protokol kesehatan yang berlaku di area venue.</p>
+        <h3>Deskripsi Acara</h3>
+        <p id="descEvent">Memuat deskripsi...</p>
+
+        <h3>Syarat & Ketentuan</h3>
+        <ol id="tncEvent">
+            <li>Memuat ketentuan...</li>
+        </ol>
+
+        <h3>Pilih Kategori Tiket / Meja</h3>
+
+        <!-- Pilihan 1: Single Pass -->
+        <div class="ticket-card selected" onclick="selectTicket('single', this)">
+            <div class="ticket-info">
+                <b>Single Pass (1 Pax)</b>
+                <p>Akses masuk untuk 1 orang (Standing Area)</p>
+            </div>
+            <div class="ticket-price" id="priceSingleDisplay">Rp 0</div>
         </div>
 
-        <!-- Pilihan Paket Tiket / Meja -->
-        <div class="section-box pilihan-tiket-container">
-            <h3>Pilih Kategori Tiket / Meja</h3>
-            
-            <div class="ticket-option active" data-harga="150000">
-                <div class="ticket-info">
-                    <strong>Single Pass (1 Pax)</strong>
-                    <p>Akses masuk untuk 1 orang (Standing Area)</p>
-                </div>
-                <div class="ticket-price">Rp 150.000</div>
+        <!-- Pilihan 2: Table Package -->
+        <div class="ticket-card" onclick="selectTicket('table', this)">
+            <div class="ticket-info">
+                <b>Table Package (4 Pax)</b>
+                <p>1 Meja VIP + Akses masuk 4 orang</p>
             </div>
-
-            <div class="ticket-option" data-harga="1200000">
-                <div class="ticket-info">
-                    <strong>Table Package (4 Pax)</strong>
-                    <p>1 Meja VIP + Akses masuk 4 orang</p>
-                </div>
-                <div class="ticket-price">Rp 1.200.000</div>
-            </div>
-
-            <div class="ticket-option" data-harga="1800000">
-                <div class="ticket-info">
-                    <strong>Sofa VIP Package (6 Pax)</strong>
-                    <p>1 Meja Sofa + Akses masuk 6 orang + Free Drinks</p>
-                </div>
-                <div class="ticket-price">Rp 1.800.000</div>
-            </div>
+            <div class="ticket-price" id="priceTableDisplay">Rp 0</div>
         </div>
 
-    <!-- Tombol Aksi Pembelian Tiket Dinamis -->
+        <!-- Pilihan 3: Sofa VIP Package -->
+        <div class="ticket-card" onclick="selectTicket('sofa', this)">
+            <div class="ticket-info">
+                <b>Sofa VIP Package (6 Pax)</b>
+                <p>1 Meja Sofa + Akses masuk 6 orang + Free Drinks</p>
+            </div>
+            <div class="ticket-price" id="priceSofaDisplay">Rp 0</div>
+        </div>
 
-    <button id="btnBeliTiket" class="btn-beli-utama">
-        Pesan Tiket Sekarang (Rp 150.000)
-    </button>
+        <!-- Tombol Pesan Tiket -->
+        <button id="btnPesan" class="btn-checkout">Pesan Tiket Sekarang (Rp 0)</button>
+    </div>
 
+    <!-- Script Logika dan Firestore -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-    <script>
-
-        const opsiTiket =
-            document.querySelectorAll('.ticket-option');
-
-        const btnBeli =
-            document.getElementById('btnBeliTiket');
-
-
-        // ==========================================
-        // PAKET DEFAULT
-        // ==========================================
-
-        let paketTerpilih = {
-
-            nama: "Single Pass (1 Pax)",
-
-            harga: 150000
-
+        const firebaseConfig = {
+            apiKey: "AIzaSyBkjOVS8hnBMH_XG5jwyTiZfx-1YbMh9ec",
+            authDomain: "tiketing-website.firebaseapp.com",
+            projectId: "tiketing-website",
+            storageBucket: "tiketing-website.firebasestorage.app",
+            messagingSenderId: "975651875774",
+            appId: "1:975651875774:web:04471e9715fd101ccee7ef",
+            measurementId: "G-3DRP44JKW4"
         };
 
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-        // ==========================================
-        // MEMILIH PAKET
-        // ==========================================
+        let selectedCategory = 'single'; 
+        let eventDataGlobal = {};
+        let eventIdGlobal = '';
 
-        opsiTiket.forEach(option => {
+        window.selectTicket = function(category, element) {
+            document.querySelectorAll('.ticket-card').forEach(card => card.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedCategory = category;
+            updateCheckoutButtonText();
+        }
 
-            option.addEventListener(
-                'click',
-                function() {
+        function updateCheckoutButtonText() {
+            let activePrice = 0;
+            if (selectedCategory === 'single') activePrice = eventDataGlobal.priceSingle || 0;
+            if (selectedCategory === 'table') activePrice = eventDataGlobal.priceTable || 0;
+            if (selectedCategory === 'sofa') activePrice = eventDataGlobal.priceSofa || 0;
 
-                    // Hilangkan active
-                    opsiTiket.forEach(opt => {
+            const formatRp = `Rp ${Number(activePrice).toLocaleString('id-ID')}`;
+            document.getElementById('btnPesan').innerText = `Pesan Tiket Sekarang (${formatRp})`;
+        }
 
-                        opt.classList.remove(
-                            'active'
-                        );
+        async function loadEventDetail() {
+            const urlParams = new URLSearchParams(window.location.search);
+            eventIdGlobal = urlParams.get('id');
 
-                    });
+            if (!eventIdGlobal) {
+                alert("ID Event tidak ditemukan!");
+                return;
+            }
 
+            try {
+                const docRef = doc(db, "events", eventIdGlobal);
+                const docSnap = await getDoc(docRef);
 
-                    // Aktifkan pilihan
-                    this.classList.add(
-                        'active'
-                    );
+                if (docSnap.exists()) {
+                    eventDataGlobal = docSnap.data();
 
+                    // Perbaikan pemetaan data Firestore ke HTML
+                    document.getElementById('titleEvent').innerText = eventDataGlobal.eventName || '-';
+                    document.getElementById('dateEvent').innerText = eventDataGlobal.eventDate || '-';       // Diperbaiki dari eventDesc
+                    document.getElementById('locationEvent').innerText = eventDataGlobal.eventLocation || '-'; // Diperbaiki dari eventDate
+                    document.getElementById('descEvent').innerText = eventDataGlobal.eventFullDesc || 'Tidak ada deskripsi.';
 
-                    // Ambil data
-                    const nama =
-                        this.getAttribute(
-                            'data-nama'
-                        );
+                    const formatRp = (val) => val ? `Rp ${Number(val).toLocaleString('id-ID')}` : 'Rp 0';
+                    document.getElementById('priceSingleDisplay').innerText = formatRp(eventDataGlobal.priceSingle);
+                    document.getElementById('priceTableDisplay').innerText = formatRp(eventDataGlobal.priceTable);
+                    document.getElementById('priceSofaDisplay').innerText = formatRp(eventDataGlobal.priceSofa);
 
-                    const harga =
-                        parseInt(
-                            this.getAttribute(
-                                'data-harga'
-                            )
-                        );
+                    updateCheckoutButtonText();
 
-
-                    // Simpan pilihan
-                    paketTerpilih = {
-
-                        nama: nama,
-
-                        harga: harga
-
-                    };
-
-
-                    // Format harga
-                    const hargaFormat =
-                        harga.toLocaleString(
-                            'id-ID'
-                        );
-
-
-                    // Update tombol
-                    btnBeli.innerText =
-                        `Pesan Tiket Sekarang (Rp ${hargaFormat})`;
-
+                    if (eventDataGlobal.eventTnC) {
+                        const tncList = document.getElementById('tncEvent');
+                        tncList.innerHTML = "";
+                        eventDataGlobal.eventTnC.split('\n').forEach(item => {
+                            if (item.trim() !== "") {
+                                const li = document.createElement('li');
+                                li.innerText = item;
+                                tncList.appendChild(li);
+                            }
+                        });
+                    }
+                } else {
+                    alert("Data event tidak ditemukan!");
                 }
-            );
+            } catch (error) {
+                console.error("Gagal memuat detail event:", error);
+            }
+        }
 
+        // SIMPAN KE LOCALSTORAGE SESUAI DENGAN FORMAT YANG DIBACA CHECKOUT.JS
+        document.getElementById('btnPesan').addEventListener('click', () => {
+            let activePrice = 0;
+            let categoryName = '';
+
+            if (selectedCategory === 'single') {
+                activePrice = eventDataGlobal.priceSingle || 0;
+                categoryName = 'Single Pass (1 Pax)';
+            } else if (selectedCategory === 'table') {
+                activePrice = eventDataGlobal.priceTable || 0;
+                categoryName = 'Table Package (4 Pax)';
+            } else if (selectedCategory === 'sofa') {
+                activePrice = eventDataGlobal.priceSofa || 0;
+                categoryName = 'Sofa VIP Package (6 Pax)';
+            }
+
+            // Susun objek data paket sesuai struktur yang diminta checkout.js
+            const packagePayload = {
+                eventId: eventIdGlobal,
+                eventName: eventDataGlobal.eventName || '-',
+                eventDate: eventDataGlobal.eventDate || '-',
+                eventLocation: eventDataGlobal.eventLocation || '-',
+                packageName: categoryName,
+                packagePrice: Number(activePrice)
+            };
+
+            // Simpan ke localStorage
+            localStorage.setItem("selectedPackage", JSON.stringify(packagePayload));
+
+            // Pindah ke halaman checkout tanpa parameter URL yang rumit
+            window.location.href = "checkout.html";
         });
 
-
-        // ==========================================
-        // KLIK PESAN TIKET
-        // ==========================================
-
-        btnBeli.addEventListener(
-            'click',
-            function() {
-
-                const dataCheckout = {
-
-                    eventName:
-                        "ZODIAC UNIVERSE",
-
-                    eventDate:
-                        "1 Agustus",
-
-                    eventLocation:
-                        "Stalk JAKARTA",
-
-                    packageName:
-                        paketTerpilih.nama,
-
-                    packagePrice:
-                        paketTerpilih.harga
-
-                };
-
-
-                // Simpan data paket
-                localStorage.setItem(
-                    'selectedPackage',
-                    JSON.stringify(
-                        dataCheckout
-                    )
-                );
-
-
-                // Pergi ke checkout
-                window.location.href =
-                    'checkout.html';
-
-            }
-        );
-
-    </script>
-
-
-    <!-- Firebase Authentication -->
-
-    <script
-        type="module"
-        src="firebase-auth.js">
+        loadEventDetail();
     </script>
 
 </body>
