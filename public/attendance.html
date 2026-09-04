@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar Hadir Penonton - HELLPHORIA</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Tambahkan library SheetJS untuk export Excel di dalam <head> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
         .container { max-width: 800px; margin: 40px auto; padding: 20px; }
         .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
@@ -31,7 +33,10 @@
         <div class="card">
             <div class="header-flex">
                 <h1>Daftar Penonton Check-In</h1>
-                <a href="scanner.html" class="btn-back">&larr; Kembali ke Scanner</a>
+                <div>
+                    <button id="btnExport" style="background: #28a745; color: white; border: none; padding: 8px 14px; border-radius: 6px; font-weight: bold; cursor: pointer; margin-right: 10px;">📥 Download Excel</button>
+                    <a href="scanner.html" class="btn-back">&larr; Kembali ke Scanner</a>
+                </div>
             </div>
 
             <div class="table-responsive">

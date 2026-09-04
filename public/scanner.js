@@ -1,5 +1,5 @@
 // ==========================================================
-// SCANNER.JS - Pemilih Kamera Stabil & Default Belakang
+// SCANNER.JS - Core API Kamera Stabil (Kunci Lensa Utama 1x)
 // ==========================================================
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -94,18 +94,54 @@ async function onScanSuccess(decodedText) {
     }
 }
 
-// Menggunakan Html5QrcodeScanner standar dengan preferensi kamera belakang (environment)
-const scanner = new Html5QrcodeScanner(
-    "reader",
-    { 
-        fps: 10, 
-        qrbox: { width: 250, height: 250 },
-        // Meminta browser menggunakan kamera belakang secara default
-        aspectRatio: 1.0
-    },
-    /* verbose= */ false
-);
+const html5QrCode = new Html5Qrcode("reader");
 
-scanner.render(onScanSuccess, (errorMessage) => {
-    // Abaikan error scan frame kecil
+// 2. Fungsi Deteksi dan Filter Lensa Kamera
+Html5Qrcode.getCameras().then(devices => {
+    if (devices && devices.length) {
+        let selectedCameraId = devices[0].id; 
+
+        // Prioritas 1: Cari kamera dengan label "back" dan angka "0" (Lensa Utama 1x)
+        const mainBackCamera = devices.find(device => 
+            device.label.toLowerCase().includes('back') && device.label.includes('0')
+        );
+        
+        // Prioritas 2: Jika "0" tidak ada, cari yang ada kata "back" saja
+        const anyBackCamera = devices.find(device => 
+            device.label.toLowerCase().includes('back')
+        );
+
+        if (mainBackCamera) {
+            selectedCameraId = mainBackCamera.id;
+        } else if (anyBackCamera) {
+            selectedCameraId = anyBackCamera.id;
+        } else {
+            // Jika HP tidak ngasih nama label, biasanya kamera belakang ada di urutan terakhir
+            selectedCameraId = devices[devices.length - 1].id;
+        }
+
+        // Mulai kamera dengan ID yang sudah diseleksi
+        html5QrCode.start(
+            selectedCameraId, // Pakai spesifik ID, bukan facingMode
+            {
+                fps: 10,
+                qrbox: { width: 250, height: 250 },
+                aspectRatio: 1.0
+            },
+            onScanSuccess,
+            (errorMessage) => { /* Abaikan error per frame */ }
+        ).catch((err) => {
+            console.error("Gagal memulai kamera dengan ID spesifik:", err);
+            tampilkanHasil("error", "Kamera Gagal Diakses", "Pastikan izin kamera sudah diberikan.");
+        });
+    }
+}).catch(err => {
+    // Fallback: Jika browser nge-blokir pencarian list kamera, pakai cara lama
+    console.warn("Gagal nge-list kamera, kembali ke default environment", err);
+    html5QrCode.start(
+        { facingMode: "environment" },
+        { fps: 10, qrbox: { width: 250, height: 250 }, aspectRatio: 1.0 },
+        onScanSuccess,
+        (errorMessage) => {}
+    );
 });

@@ -119,11 +119,16 @@
     <div class="bookings-container">
         <h1 class="page-title">Tiket Saya</h1>
         
-        <!-- Wadah buat nampilin tiket dari JavaScript -->
-        <div id="ticketsList">
-            <div class="empty-state">
-                <h2>Memuat tiket...</h2>
-            </div>
+        <!-- BAGIAN 1: TIKET AKTIF -->
+        <h3 style="color: #4f0814; margin-bottom: 15px; border-bottom: 2px solid #ddd; padding-bottom: 5px;">Tiket Aktif</h3>
+        <div id="activeTicketsList">
+            <div class="empty-state"><p>Memuat tiket aktif...</p></div>
+        </div>
+
+        <!-- BAGIAN 2: RIWAYAT (HISTORY) -->
+        <h3 style="color: #666; margin-top: 40px; margin-bottom: 15px; border-bottom: 2px solid #ddd; padding-bottom: 5px;">Riwayat Tiket Digunakan</h3>
+        <div id="historyTicketsList">
+            <div class="empty-state"><p>Belum ada riwayat tiket digunakan.</p></div>
         </div>
     </div>
 

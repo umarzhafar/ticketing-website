@@ -20,6 +20,8 @@ const db = getFirestore(app);
 
 const attendanceTableBody = document.getElementById('attendanceTableBody');
 
+let dataLaporanExcel = [];
+
 async function muatDaftarHadir() {
     try {
         const q = query(collection(db, "reservations"), where("checkInStatus", "==", "checked_in"));
@@ -27,12 +29,24 @@ async function muatDaftarHadir() {
 
         if (querySnapshot.empty) {
             attendanceTableBody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: #777;">Belum ada penonton yang check-in.</td></tr>`;
+            dataLaporanExcel = [];
             return;
         }
 
         attendanceTableBody.innerHTML = '';
+        dataLaporanExcel = [];
+
         querySnapshot.forEach((doc) => {
             const data = doc.data();
+            // Masukkan ke array untuk format Excel nantinya
+            dataLaporanExcel.push({
+                "Nama Lengkap": data.namaLengkap,
+                "Nama Event": data.eventName || "-",
+                "Paket Tiket": data.packageName,
+                "Kode Reservasi": data.reservationCode,
+                "Status": "Sudah Check-In"
+            });
+
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td><strong>${data.namaLengkap}</strong></td>
@@ -49,3 +63,16 @@ async function muatDaftarHadir() {
 }
 
 muatDaftarHadir();
+
+document.getElementById('btnExport').addEventListener('click', () => {
+    if (dataLaporanExcel.length === 0) {
+        alert("Belum ada data penonton yang bisa di-export ke Excel!");
+        return;
+    }
+
+    const worksheet = XLSX.utils.json_to_sheet(dataLaporanExcel);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Data Kehadiran Penonton");
+
+    XLSX.writeFile(workbook, "Laporan_Kehadiran_Penonton.xlsx");
+});
