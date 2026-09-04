@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBkjOVS8hnBMH_XG5jwyTiZfx-1YbMh9ec",
@@ -14,71 +14,96 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-let dataKehadiranExcel = [];
-let dataBookingExcel = [];
-
-async function muatDataAdmin() {
+async function ambilDataReservasi() {
     try {
         const snapshotAll = await getDocs(collection(db, "reservations"));
         
-        dataKehadiranExcel = [];
-        dataBookingExcel = [];
+        let listKehadiran = [];
+        let listBooking = [];
 
-        snapshotAll.forEach((doc) => {
-            const data = doc.data();
+        for (const reservationDoc of snapshotAll.docs) {
+            const data = reservationDoc.data();
             const isCheckedIn = data.checkInStatus === "checked_in";
             
-            // Menangkap berbagai kemungkinan nama field nomor telepon di database
-            const teleponUser = data.noTelepon || data.phone || data.phoneNumber || data.whatsapp || data.telp || data.noHp || "-";
+            let teleponUser = data.noHp || "-";
 
-            // 1. Data Booking Khusus Keuangan (Tanpa status check-in, ditambah harga/nominal)
-            dataBookingExcel.push({
+            if (teleponUser === "-" && data.userId) {
+                try {
+                    const userSnap = await getDoc(doc(db, "users", data.userId));
+                    if (userSnap.exists()) {
+                        teleponUser = userSnap.data().noHp || "-";
+                    }
+                } catch (err) {
+                    console.warn("Gagal ambil data user untuk ID:", data.userId);
+                }
+            }
+
+            let waktuBeli = "-";
+            if (data.createdAt && typeof data.createdAt.toDate === 'function') {
+                waktuBeli = data.createdAt.toDate().toLocaleString("id-ID", {
+                    dateStyle: "medium",
+                    timeStyle: "short"
+                });
+            }
+
+            // Fallback otomatis nama paket berdasarkan harga jika di database bernilai kosong/'-'
+            let namaPaket = data.packageName;
+            if (!namaPaket || namaPaket === "-") {
+                if (data.packagePrice === 150000) namaPaket = "Single Pass (1 Pax)";
+                else if (data.packagePrice === 1200000) namaPaket = "Table Package (4 Pax)";
+                else if (data.packagePrice === 1800000) namaPaket = "Sofa VIP Package (6 Pax)";
+                else namaPaket = "Tiket Kustom";
+            }
+
+            listBooking.push({
                 "Nama Lengkap": data.namaLengkap || "-",
                 "No. Telepon": teleponUser,
                 "Nama Event": data.eventName || "-",
-                "Paket Tiket": data.packageName || "-",
+                "Paket Tiket": namaPaket,
                 "Harga (Rp)": data.packagePrice || 0,
-                "Kode Reservasi": data.reservationCode || "-"
+                "Kode Reservasi": data.reservationCode || "-",
+                "Waktu Pembelian": waktuBeli
             });
 
-            // 2. Data khusus untuk Excel List Kehadiran
             if (isCheckedIn) {
-                dataKehadiranExcel.push({
+                listKehadiran.push({
                     "Nama Lengkap": data.namaLengkap || "-",
                     "No. Telepon": teleponUser,
                     "Nama Event": data.eventName || "-",
-                    "Paket Tiket": data.packageName || "-",
+                    "Paket Tiket": namaPaket,
                     "Kode Reservasi": data.reservationCode || "-",
+                    "Waktu Pembelian": waktuBeli,
                     "Status": "Sudah Check-In"
                 });
             }
-        });
+        }
+
+        return { listKehadiran, listBooking };
     } catch (error) {
         console.error("Gagal memuat data admin:", error);
+        return { listKehadiran: [], listBooking: [] };
     }
 }
 
-muatDataAdmin();
-
-// Tombol 1: Download List Kehadiran (Hijau)
-document.getElementById('btnExport').addEventListener('click', () => {
-    if (dataKehadiranExcel.length === 0) {
+document.getElementById('btnExport').addEventListener('click', async () => {
+    const { listKehadiran } = await ambilDataReservasi();
+    if (listKehadiran.length === 0) {
         alert("Belum ada penonton yang melakukan check-in!");
         return;
     }
-    const worksheet = XLSX.utils.json_to_sheet(dataKehadiranExcel);
+    const worksheet = XLSX.utils.json_to_sheet(listKehadiran);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "List Kehadiran");
     XLSX.writeFile(workbook, "List_Kehadiran_Penonton.xlsx");
 });
 
-// Tombol 2: Download Data Booking Pelanggan untuk Keuangan (Biru)
-document.getElementById('btnExportBooking').addEventListener('click', () => {
-    if (dataBookingExcel.length === 0) {
+document.getElementById('btnExportBooking').addEventListener('click', async () => {
+    const { listBooking } = await ambilDataReservasi();
+    if (listBooking.length === 0) {
         alert("Belum ada data booking yang tersimpan!");
         return;
     }
-    const worksheet = XLSX.utils.json_to_sheet(dataBookingExcel);
+    const worksheet = XLSX.utils.json_to_sheet(listBooking);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Data Keuangan Booking");
     XLSX.writeFile(workbook, "Data_Keuangan_Booking_Pelanggan.xlsx");
