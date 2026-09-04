@@ -79,9 +79,19 @@ onAuthStateChanged(auth, async (user) => {
             // Format angka Rupiah
             const hargaFormat = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0 }).format(data.packagePrice);
 
+            // 1. Cek status di awal
+            const isCheckedIn = data.checkInStatus === "checked_in";
+            
+            // 2. Siapkan badge dan label berdasarkan status
+            const statusBadge = isCheckedIn 
+            ? `<span style="color: #6c757d; font-weight: bold; background: #e9ecef; padding: 2px 8px; border-radius: 4px;">✓ Sudah Digunakan</span>`
+            : `<span style="color: #28a745; font-weight: bold; background: #e8f5e9; padding: 2px 8px; border-radius: 4px;">✓ Lunas</span>`;
+            
+            const qrTextLabel = isCheckedIn ? "Tidak Aktif" : "Klik Perbesar";
+            
             // Bikin elemen HTML untuk setiap tiket
             const ticketEl = document.createElement('div');
-            ticketEl.className = 'ticket-card';
+            ticketEl.className = isCheckedIn ? 'ticket-card checked-in' : 'ticket-card';
             ticketEl.innerHTML = `
                 <div class="ticket-header">
                     <span>Kode Reservasi: <strong>${data.reservationCode}</strong></span>

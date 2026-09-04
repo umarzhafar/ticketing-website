@@ -86,6 +86,26 @@
         .close-modal:hover {
             color: #e52020;
         }
+
+        /* =========================================
+           CSS Status Tiket Sudah Digunakan (Checked-In)
+        ========================================== */
+        .ticket-card.checked-in {
+            background-color: #f1f3f5 !important;
+            opacity: 0.7;
+            border-left-color: #adb5bd !important; /* Ubah garis merah jadi abu-abu */
+        }
+        .ticket-card.checked-in h3, 
+        .ticket-card.checked-in p,
+        .ticket-card.checked-in strong {
+            color: #6c757d !important;
+        }
+        /* Matikan efek klik dan hover pada QR jika sudah digunakan */
+        .ticket-card.checked-in .qr-box {
+            cursor: not-allowed !important;
+            pointer-events: none !important;
+            background-color: #e9ecef !important;
+        }
     </style>
 </head>
 <body>

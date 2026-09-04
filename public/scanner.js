@@ -1,5 +1,5 @@
 // ==========================================================
-// SCANNER.JS - Validasi QR Code Tiket di Pintu Masuk
+// SCANNER.JS - Pemilih Kamera Stabil & Default Belakang
 // ==========================================================
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -24,10 +24,9 @@ const resultDetail = document.getElementById('resultDetail');
 
 let isScanning = true;
 
-// Fungsi untuk menampilkan hasil scan ke layar dengan jelas
 function tampilkanHasil(status, pesan, detailHtml = "") {
     resultBox.style.display = "block";
-    resultBox.className = "result-box"; // Reset class
+    resultBox.className = "result-box";
 
     if (status === "success") {
         resultBox.classList.add("result-success");
@@ -41,47 +40,39 @@ function tampilkanHasil(status, pesan, detailHtml = "") {
     resultDetail.innerHTML = detailHtml;
 }
 
-// Fungsi utama saat QR Code tertangkap kamera
 async function onScanSuccess(decodedText) {
     if (!isScanning) return;
     
     try {
         let codeReservasi = decodedText.trim();
 
-        // Cek apakah QR code berisi format JSON atau teks biasa
         try {
             const parsed = JSON.parse(decodedText);
             if (parsed.reservationCode) {
                 codeReservasi = parsed.reservationCode;
             }
-        } catch (e) {
-            // Jika bukan JSON, berarti langsung string kode reservasi (misal: W5987SZUDG)
-        }
+        } catch (e) {}
 
         if (!codeReservasi) {
-            tampilkanHasil("error", "QR Code Tidak Valid! ❌", "Format QR Code tidak dikenali sistem.");
+            tampilkanHasil("error", "QR Code Tidak Valid! ❌", "Format QR Code tidak dikenali.");
             return;
         }
 
-        // Hentikan proses scan sementara agar tidak membaca berulang kali
         isScanning = false;
 
-        // Ambil data dari koleksi "reservations" berdasarkan kode reservasi
         const docRef = doc(db, "reservations", codeReservasi);
         const docSnap = await getDoc(docRef);
 
         if (!docSnap.exists()) {
-            tampilkanHasil("error", "TIKET TIDAK DITEMUKAN! ❌", `Kode: ${codeReservasi} tidak terdaftar di database.`);
+            tampilkanHasil("error", "TIKET TIDAK DITEMUKAN! ❌", `Kode: ${codeReservasi} tidak terdaftar di sistem.`);
         } else {
             const data = docSnap.data();
 
-            // CEK 1: Apakah tiket sudah pernah di-scan sebelumnya?
             if (data.checkInStatus === "checked_in") {
                 tampilkanHasil("warning", "TIKET SUDAH PERNAH DIGUNAKAN! ⚠️", 
-                    `<b>Nama:</b> ${data.namaLengkap}<br><b>Tiket:</b> ${data.packageName} (${data.eventName})<br><span style="color:red; font-weight:bold;">Tiket ini sudah di-check-in sebelumnya!</span>`
+                    `<b>Nama:</b> ${data.namaLengkap}<br><b>Tiket:</b> ${data.packageName}<br><span style="color:red; font-weight:bold;">Tiket ini sudah di-scan sebelumnya!</span>`
                 );
             } else {
-                // CEK 2: Jika belum, ubah status di Firestore menjadi "checked_in" agar terkunci
                 await updateDoc(docRef, {
                     checkInStatus: "checked_in"
                 });
@@ -92,25 +83,29 @@ async function onScanSuccess(decodedText) {
             }
         }
 
-        // Beri jeda 5 detik sebelum scanner bisa membaca tiket berikutnya
         setTimeout(() => {
             isScanning = true;
         }, 5000);
 
     } catch (error) {
-        console.error("Gagal memproses QR:", error);
-        tampilkanHasil("error", "Gagal Memproses QR Code", "Terjadi kesalahan pada sistem database.");
+        console.error("Detail Error Database:", error);
+        tampilkanHasil("error", "Gagal Memproses Database ❌", `Pesan Error: ${error.message}`);
         isScanning = true;
     }
 }
 
-// Inisialisasi Html5QrcodeScanner
-const html5QrcodeScanner = new Html5QrcodeScanner(
-    "reader", 
-    { fps: 10, qrbox: { width: 250, height: 250 } },
-    false
+// Menggunakan Html5QrcodeScanner standar dengan preferensi kamera belakang (environment)
+const scanner = new Html5QrcodeScanner(
+    "reader",
+    { 
+        fps: 10, 
+        qrbox: { width: 250, height: 250 },
+        // Meminta browser menggunakan kamera belakang secara default
+        aspectRatio: 1.0
+    },
+    /* verbose= */ false
 );
 
-html5QrcodeScanner.render(onScanSuccess, (errorMessage) => {
-    // Abaikan error frame kecil saat kamera mencari posisi QR
+scanner.render(onScanSuccess, (errorMessage) => {
+    // Abaikan error scan frame kecil
 });
