@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiket Saya - tikeket.com</title>
+    
+    <!-- Manggil CSS lu -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* CSS Khusus buat desain e-ticket */
+        .bookings-container { max-width: 650px; margin: 40px auto; padding: 20px; }
+        .page-title { color: #4f0814; text-align: center; margin-bottom: 30px; font-size: 28px; }
+        
+        .ticket-card { 
+            background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 8px solid #e52020; 
+        }
+        .ticket-header { 
+            display: flex; justify-content: space-between; border-bottom: 2px dashed #eee; 
+            padding-bottom: 12px; margin-bottom: 15px; font-size: 14px; color: #777;
+        }
+        .ticket-body { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+        .ticket-info h3 { color: #3b0610; margin-bottom: 8px; font-size: 22px; }
+        .ticket-info p { color: #555; font-size: 14px; margin-bottom: 6px; }
+        
+        .qr-box { 
+            background: white; padding: 10px; border-radius: 8px; 
+            border: 1px solid #ddd; display: flex; flex-direction: column; align-items: center;
+        }
+        .qr-box span { font-size: 11px; margin-top: 8px; color: #777; font-weight: bold; }
+        
+        .empty-state { text-align: center; padding: 60px 20px; color: #666; }
+        
+        @media (max-width: 600px) {
+            .ticket-body { flex-direction: column; text-align: center; }
+            .ticket-info { margin-bottom: 20px; }
+        }
+
+        /* =========================================
+           CSS Tambahan buat Pop-up (Modal) QR Code 
+           (KODE BARU DITARUH DI SINI)
+        ========================================== */
+        .qr-box { 
+            cursor: pointer; 
+            transition: transform 0.2s; 
+        }
+        .qr-box:hover { 
+            transform: scale(1.05); 
+        }
+
+        .modal-overlay {
+            display: none; 
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            width: 320px;
+            max-width: 90%;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #888;
+            cursor: pointer;
+        }
+        .close-modal:hover {
+            color: #e52020;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <a href="index.html">Kembali ke Beranda</a>
+    </div>
+
+    <!-- Konten Utama -->
+    <div class="bookings-container">
+        <h1 class="page-title">Tiket Saya</h1>
+        
+        <!-- Wadah buat nampilin tiket dari JavaScript -->
+        <div id="ticketsList">
+            <div class="empty-state">
+                <h2>Memuat tiket...</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation Bar (Menu Bookings di-set Active) -->
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <svg width="24" height="24" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            <span>Home</span>
+        </a>
+        
+        <a href="bookings.html" class="nav-item active">
+            <svg width="24" height="24" viewBox="0 0 24 24"><path d="M22 10V6c0-1.1-.9-2-2-2H4c-1.1 0-1.99.9-1.99 2v4c1.1 0 1.99.9 1.99 2s-.89 2-1.99 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c-1.1 0-2-.9-2-2s.9-2 2-2zm-2-1.46c-1.19.69-2 1.99-2 3.46s.81 2.77 2 3.46V18H4v-2.54c1.19-.69 2-1.99 2-3.46s-.81-2.77-2-3.46V6h16v2.54zM9 9h6v2H9zm0 4h6v2H9z"/></svg>
+            <span>Bookings</span>
+        </a>
+        
+        <a href="profile.html" class="nav-item">
+            <svg width="24" height="24" viewBox="0 0 24 24">
+                <circle cx="12" cy="7" r="4.5"/>
+                <path d="M12 13.5c-4.42 0-8 2.24-8 5 0 .55.45 1 1 1h14c.55 0 1-.45 1-1 0-2.76-3.58-5-8-5z"/>
+            </svg>
+            <span>Profile</span>
+        </a>
+    </div>
+
+    <!-- =========================================
+         Modal (Pop-up) QR Code Besar 
+         (KODE BARU DITARUH DI SINI)
+    ========================================== -->
+    <div id="qrModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h3 style="color: #4f0814; margin-bottom: 20px;">Scan Tiket Ini</h3>
+            
+            <!-- Tempat QR Code gede di-generate -->
+            <div id="modalQRCode" style="display: flex; justify-content: center;"></div>
+            
+            <p id="modalResCode" style="margin-top: 20px; font-weight: bold; font-size: 18px; letter-spacing: 2px; color: #333;"></p>
+        </div>
+    </div>
+
+    <!-- Library QR Code -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    
+    <!-- Script Otak Bookings -->
+    <script type="module" src="bookings.js"></script>
+</body>
+</html>

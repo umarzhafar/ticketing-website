@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scanner Tiket - Panitia HELLPHORIA</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .scanner-container { max-width: 600px; margin: 40px auto; padding: 20px; text-align: center; }
+        .scanner-card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        #reader { width: 100%; border-radius: 8px; overflow: hidden; margin-bottom: 20px; }
+        
+        /* Kotak Hasil Scan */
+        .result-box { 
+            margin-top: 20px; padding: 20px; border-radius: 8px; font-weight: bold; display: none; 
+        }
+        .result-success { background: #e8f5e9; color: #2e7d32; border: 2px solid #4caf50; }
+        .result-error { background: #ffebee; color: #c62828; border: 2px solid #ef5350; }
+        .result-warning { background: #fff8e1; color: #f57f17; border: 2px solid #ffb300; }
+    </style>
+</head>
+<body style="background-color: #f4f6f8;">
+
+    <div class="top-bar">
+        <a href="index.html">Kembali ke Beranda</a>
+    </div>
+
+    <main class="scanner-container">
+        <div class="scanner-card">
+            <h1 style="color: #4f0814; margin-bottom: 10px;">Gate Scanner Tiket</h1>
+            <p style="color: #666; margin-bottom: 20px; font-size: 14px;">Arahkan kamera ke QR Code tiket penonton</p>
+
+            <!-- Kotak Kamera Scanner -->
+            <div id="reader"></div>
+
+            <!-- Kotak Status Hasil Scan -->
+            <div id="scanResult" class="result-box">
+                <p id="resultMessage" style="font-size: 18px; margin-bottom: 5px;"></p>
+                <small id="resultDetail" style="font-weight: normal;"></small>
+            </div>
+        </div>
+    </main>
+
+    <!-- Library Html5Qrcode Scanner dari CDN -->
+    <script src="https://unpkg.com/html5-qrcode"></script>
+
+    <!-- Script Logika Scanner -->
+    <script type="module" src="scanner.js"></script>
+</body>
+</html>

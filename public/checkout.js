@@ -339,9 +339,7 @@ paymentOptions.forEach(
                 paymentOptions.forEach(
                     (opt) => {
 
-                        opt.classList.remove(
-                            "selected"
-                        );
+                        opt.classList.remove("active");
 
                     }
                 );
@@ -351,9 +349,7 @@ paymentOptions.forEach(
                 // Tandai tombol yang dipilih
                 // ------------------------------------------
 
-                this.classList.add(
-                    "selected"
-                );
+                this.classList.add("active");
 
 
                 // ------------------------------------------
