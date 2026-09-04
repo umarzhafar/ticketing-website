@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Event Baru - Admin</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .form-container { max-width: 600px; margin: 40px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: #4f0814; }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; box-sizing: border-box; }
+        .btn-submit { width: 100%; padding: 14px; background-color: #28a745; color: white; border: none; border-radius: 6px; font-weight: bold; font-size: 16px; cursor: pointer; }
+        .btn-submit:hover { background-color: #218838; }
+        .section-divider { margin: 25px 0 15px 0; border-top: 1px solid #eee; padding-top: 15px; font-weight: bold; color: #4f0814; font-size: 16px; }
+    </style>
+</head>
+<body style="background-color: #f4f6f8;">
+
+    <div class="top-bar">
+        <a href="admin.html">&larr; Kembali ke Panel Admin</a>
+    </div>
+
+    <div class="form-container">
+        <h2 style="color: #4f0814; margin-bottom: 20px;">Tambah Event Baru</h2>
+        
+        <div class="form-group">
+            <label>Nama Event</label>
+            <input type="text" id="inputEventName" placeholder="Contoh: SOUNDRIVE FESTIVAL" required>
+        </div>
+        <div class="form-group">
+            <label>Sub-Judul / Lineup Artis</label>
+            <input type="text" id="inputEventDesc" placeholder="Contoh: TULUS • RAISA • KAHITNA" required>
+        </div>
+        <div class="form-group">
+            <label>Tanggal & Lokasi</label>
+            <input type="text" id="inputEventDate" placeholder="Contoh: 20 OKTOBER • STADION GBK" required>
+        </div>
+
+        <div class="form-group">
+            <label>Deskripsi Lengkap Acara</label>
+            <textarea id="inputEventFullDesc" rows="3" placeholder="Tulis deskripsi detail konser atau acara di sini..." required></textarea>
+        </div>
+
+        <div class="section-divider">Pengaturan Harga Kategori Tiket</div>
+
+        <div class="form-group">
+            <label>Harga Single Pass (1 Pax)</label>
+            <input type="number" id="priceSingle" placeholder="Contoh: 150000" required>
+        </div>
+        <div class="form-group">
+            <label>Harga Table Package (4 Pax)</label>
+            <input type="number" id="priceTable" placeholder="Contoh: 1200000" required>
+        </div>
+        <div class="form-group">
+            <label>Harga Sofa VIP Package (6 Pax)</label>
+            <input type="number" id="priceSofa" placeholder="Contoh: 1800000" required>
+        </div>
+
+        <div class="section-divider">Syarat & Ketentuan</div>
+        <div class="form-group">
+            <label>Ketentuan Acara (Pisahkan per baris/enter)</label>
+            <textarea id="inputEventTnC" rows="3" placeholder="1. Tiket yang sudah dibeli tidak dapat dikembalikan.&#10;2. Wajib menunjukkan e-ticket."></textarea>
+        </div>
+        
+        <button id="btnSimpanEvent" class="btn-submit">Simpan & Publikasikan Event</button>
+    </div>
+
+    <script type="module" src="tambah-event.js"></script>
+</body>
+</html>

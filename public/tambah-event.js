@@ -21,21 +21,29 @@ if (btnSimpanEvent) {
         const eventName = document.getElementById('inputEventName').value.trim();
         const eventDesc = document.getElementById('inputEventDesc').value.trim();
         const eventDate = document.getElementById('inputEventDate').value.trim();
-        const eventPrice = parseInt(document.getElementById('inputEventPrice').value);
+        const eventFullDesc = document.getElementById('inputEventFullDesc').value.trim();
+        
+        const priceSingle = parseInt(document.getElementById('priceSingle').value) || 0;
+        const priceTable = parseInt(document.getElementById('priceTable').value) || 0;
+        const priceSofa = parseInt(document.getElementById('priceSofa').value) || 0;
+        const eventTnC = document.getElementById('inputEventTnC').value.trim();
 
-        if (!eventName || !eventDesc || !eventDate || !eventPrice) {
-            alert("Harap isi semua kolom dengan benar!");
+        if (!eventName || !eventDesc || !eventDate || !eventFullDesc) {
+            alert("Harap isi semua kolom utama event dengan benar!");
             return;
         }
 
         try {
-            // Simpan ke koleksi 'events' di Firestore
+            // Simpan ke koleksi 'events' di Firestore dengan struktur lengkap
             await addDoc(collection(db, "events"), {
                 eventName: eventName,
-                eventDesc: eventDesc,
-                eventDate: eventDate,
-                packagePrice: eventPrice,
-                packageName: "Single Pass (1 Pax)",
+                eventDesc: eventDesc,          // Sub-judul / Lineup Artis
+                eventDate: eventDate,          // Tanggal & Lokasi
+                eventFullDesc: eventFullDesc,  // Deskripsi Lengkap Acara
+                priceSingle: priceSingle,      // Harga Single Pass
+                priceTable: priceTable,        // Harga Table Package
+                priceSofa: priceSofa,          // Harga Sofa VIP Package
+                eventTnC: eventTnC,            // Syarat & Ketentuan
                 createdAt: serverTimestamp()
             });
 

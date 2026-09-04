@@ -53,13 +53,10 @@
 
     <!-- 3. Hero Section (Banner Slider) -->
     <section class="hero-section">
-        <!-- Wrapper ini gua kasih batas maksimal 1100px biar rapi kayak desain awal lu -->
         <div class="slider-wrapper" style="width: 100%; max-width: 1100px; position: relative; overflow: hidden; border-radius: 12px; box-shadow: 0 15px 30px rgba(0,0,0,0.1);">
             
+            <!-- Slider container dibiarin ada isinya (default statis lu), nanti di-handle sama JS -->
             <div class="slider-container">
-                
-                <!-- SLIDE 1 (Acara Zodiac Universe) -->
-                <!-- Class-nya sekarang bener: banner-container slide -->
                 <div class="banner-container slide" style="background: linear-gradient(to right, #380108, #cc151e);">
                     <div class="banner-subtitle">MENAMPILKAN</div>
                     <div class="banner-title">ZODIAC<br>UNIVERSE</div>
@@ -69,30 +66,16 @@
                         <button class="banner-btn">Beli tiket di Sini</button>
                     </a>
                 </div>
-                
-                <!-- SLIDE 2 (Acara Contoh Buat Dites Geser) -->
-                <div class="banner-container slide" style="background: linear-gradient(to right, #2a0845, #6441A5);">
-                    <div class="banner-subtitle">SEGERA HADIR</div>
-                    <div class="banner-title">FESTIVAL<br>INDIE LOKAL</div>
-                    <div class="banner-desc">HINDIA • PAMUNGKAS • FOURTWNTY</div>
-                    <div class="banner-date">15 SEPTEMBER • GBK JAKARTA</div>
-                    <a href="detailevent2.html">
-                        <button class="banner-btn">Lihat detail</button>
-                    </a>
-                </div>
-
             </div>
             
             <!-- Titik-titik di bawah banner -->
             <div class="dots-container" style="position: absolute; bottom: 20px; width: 100%; display: flex; justify-content: center; gap: 8px;">
                 <div class="dot active"></div>
-                <div class="dot"></div>
             </div>
         </div>
     </section>
 
-    <!-- 4. Bottom Navigation Bar (DITARUH DI SINI) -->
-    <!-- Bottom Navigation Bar (3 Menu Sejajar Presisi) -->
+    <!-- 4. Bottom Navigation Bar -->
     <div class="bottom-nav">
         <a href="index.html" class="nav-item active">
             <svg width="24" height="24" viewBox="0 0 24 24">
@@ -117,9 +100,13 @@
         </a>
     </div>
 
+    <!-- Script Tarik Data Event dari Firebase -->
+    <script type="module" src="index-events.js"></script>
+    
     <!-- Manggil file JavaScript buatan kita -->
     <script src="script.js"></script>
-    <!-- INI PENTING: Manggil otak Firebase biar menu dinamisnya jalan -->
+    
+    <!-- Manggil otak Firebase biar menu dinamisnya jalan -->
     <script type="module" src="firebase-auth.js"></script>
 </body>
 </html>

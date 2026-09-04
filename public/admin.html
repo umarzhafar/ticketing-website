@@ -9,7 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
         .admin-container { max-width: 900px; margin: 40px auto; padding: 20px; }
-        .admin-card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        .admin-card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 25px; }
         .admin-title { color: #4f0814; font-size: 24px; margin-bottom: 10px; font-weight: bold; }
         .admin-subtitle { color: #666; margin-bottom: 30px; font-size: 14px; }
         
@@ -26,6 +26,12 @@
         .btn-blue { background: #007bff; }
         .btn-green:hover { background: #218838; }
         .btn-blue:hover { background: #0056b3; }
+        
+        /* Styling tambahan untuk tabel manajemen event */
+        .event-table-container { width: 100%; overflow-x: auto; margin-top: 15px; }
+        .admin-table { width: 100%; border-collapse: collapse; font-size: 14px; text-align: left; }
+        .admin-table th, .admin-table td { padding: 12px; border-bottom: 1px solid #ddd; }
+        .admin-table th { background-color: #f8f9fa; color: #4f0814; }
     </style>
 </head>
 <body style="background-color: #f4f6f8;">
@@ -49,6 +55,10 @@
                     <h3>📋 Lihat Tabel Kehadiran</h3>
                     <p>Pantau daftar nama penonton yang sudah berhasil masuk ke lokasi acara.</p>
                 </a>
+                <a href="tambah-event.html" class="menu-box">
+                    <h3>➕ Tambah Event Baru</h3>
+                    <p>Buat dan tambahkan event baru ke dalam sistem manajemen tiket.</p>
+                </a>
             </div>
 
             <!-- Bagian Unduh Laporan Excel Terpusat -->
@@ -59,6 +69,34 @@
                     <button id="btnExport" class="btn-action btn-green">Download Laporan Kehadiran</button>
                     <button id="btnExportBooking" class="btn-action btn-blue">Download Data Semua Booking</button>
                 </div>
+            </div>
+        </div>
+
+        <!-- CARD BARU: Kelola & Hapus Event -->
+        <div class="admin-card">
+            <h2 style="color: #4f0814; font-size: 20px; margin-bottom: 5px;">Kelola & Hapus Event</h2>
+            <p style="font-size: 13px; color: #666; margin-bottom: 15px;">Centang event yang sudah lewat atau ingin dihapus dari beranda.</p>
+            
+            <button id="btnHapusPilihan" style="background:#dc3545; color:white; border:none; padding:8px 14px; border-radius:6px; cursor:pointer; font-weight:bold; font-size:13px; margin-bottom: 10px;">
+                🗑️ Hapus Event Terpilih
+            </button>
+
+            <div class="event-table-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 40px; text-align: center;">Pilih</th>
+                            <th>Nama Event</th>
+                            <th>Deskripsi</th>
+                            <th>Tanggal</th>
+                            <th>Harga</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="eventTableBody">
+                        <!-- Data dimuat otomatis via admin.js -->
+                    </tbody>
+                </table>
             </div>
         </div>
     </main>
